@@ -17,7 +17,7 @@ filepath3="C:\\Users\\rdf0969\\Documents\\Python Scripts\\test"
 NEGATIVE=os.path.join(filepath2,"NEGATIVE.txt")
 POSITIVE=os.path.join(filepath2,"POSITIVE.txt")
 SD=os.path.join(filepath3,"SampleData.txt")
-download=os.path.join(filepath3,"DOWNLOADLOG_MASTER.txt")
+download=os.path.join(filepath3,"DOWNLOADLOG.txt")
 
 '''
 This section will upload the dictionaries
