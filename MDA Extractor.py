@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sun Oct 15 21:07:41 2017
-@author: Ryan
-
 This code extracts the MD&A sections from 10K financial statements.  The list of paths for the respective 10K's
 are obtained from the SEC's master files giving paths to all of the public documents that are filed with the SEC
 in each quarter.  The repository includes that actual download links (i.e. downloadindex.sas7bdat and downloadlist.txt) 
