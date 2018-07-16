@@ -1,7 +1,7 @@
 # 10K-MDA-Section
 These programs (i.e., MDA Extractor.py and MDA Cleaner and Tone Calculator.py) will extract the Management Discussion and Analyses (MD&A) section from 10K Financial Statements and calculate the tone of these sections.  You must use the attached files that contain the list of 10K files paths on the SEC servers.  The program will output the sections that are potential MD&A sections and calculate the tone accordingly.  For details as to how this data is used, please refer to "Do Tone Changes in Financial Statements Predict Acquisition Behavior?" by John Berns, Patty Bick, Ryan Flugum and Reza Houston.  A detailed list of the included documents and programs in this repository are as follows:
 
-## downloadindex.sas7bdat
+## downloadindex.csv
 This is a sas dataset that includes all of the SEC filings classified as '10-K','10-K/A','10-K405/A','10-K405','10-KSB', '10-KSB/A','10KSB','10KSB/A','10KSB40','10KSB40/A' from 2002 to 2016.  This data is obtained from the SEC archive located here https://www.sec.gov/Archives/edgar/full-index/.  Note that this dataset contains the number of each filing that I assign.  You will use this index throughout the process as 'filing' is the main identifier that I use for each filing.
 
 ## downloadlist.txt
@@ -10,7 +10,7 @@ This is the text file that includes the filing number and links to be used in th
 ## Word Dictionary Files
 This file includes the Positive and Negative word dictionaries that are used to calculate the tone of the MD&A sections.  Specifically, the POSITIVE.txt and NEGATIVE.txt files are used in the MDA Cleaner and Tone Calculator.py programs.
 
-## MDA_Tone.sas7bdata
+## MDA_Tone.csv
 This is the sas dataset that includes the final output of Managment Discussion and Analysis tone of each financial statement.  If you would not like to understand the attached programs and would just like the resulting output, use this dataset.  Also, please note that some filings have multiple possible MD&A sections - please evaluate the data carefully and make sure that each filing has only one tone measurement. 
 
 ## MDA Data Construction.sas
