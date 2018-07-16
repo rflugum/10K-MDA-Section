@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
 """
-Created on Tue Oct 24 21:41:03 2017
-@author: Ryan
 This program first identifies valid MD&A sections and then computes the tone of these sections.  The final output file will by 
 SampleData.txt and it is saved in the file that you designate as filepath3.
 """
