@@ -8,7 +8,7 @@ This is a csv file that includes all of the SEC filings classified as '10-K','10
 This is the text file that includes the filing number and links to be used in the MDA Extractor.py program.  This text file is a subset of the downloadindex sas dataset and includes only the 'filing' and 'link' columns.
 
 ## Word Dictionary Files
-This file includes the Positive and Negative word dictionaries that are used to calculate the tone of the MD&A sections.  Specifically, the POSITIVE.txt and NEGATIVE.txt files are used in the MDA Cleaner and Tone Calculator.py programs.
+This file includes the Positive and Negative word dictionaries that are used to calculate the tone of the MD&A sections.  Specifically, the POSITIVE.txt and NEGATIVE.txt files are used in the MDA Cleaner and Tone Calculator.py programs.  These dictionaries were contructed by Tim Loughran and Bill McDonald and are used in Loughran and McDonald (2011).  These dictionaries, as well as other word classifications, can be obtained at https://sraf.nd.edu/. 
 
 ## MDA_Tone.csv
 This is the sas dataset that includes the final output of Managment Discussion and Analysis tone of each financial statement.  If you would not like to understand the attached programs and would just like the resulting output, use this dataset.  Also, please note that some filings have multiple possible MD&A sections - please evaluate the data carefully and make sure that each filing has only one tone measurement. 
