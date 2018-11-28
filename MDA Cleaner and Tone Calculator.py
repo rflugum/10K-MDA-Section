@@ -138,7 +138,7 @@ with open(download, 'r') as txtfile:
                 with open(SD,'a') as f:
                     f.write(','.join(Post)+'\n')
                     f.close    
-                print Post
+                print(Post)
                 Post=[]
             else:
                 for k in range(0,len(locations),2):
@@ -202,5 +202,5 @@ with open(download, 'r') as txtfile:
                         with open(SD,'a') as f:
                             f.write(','.join(Post)+'\n')
                             f.close   
-                        print Post
+                        print(Post)
                         Post=[]
