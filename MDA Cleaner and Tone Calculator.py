@@ -3,21 +3,24 @@ This program first identifies valid MD&A sections and then computes the tone of 
 SampleData.txt and it is saved in the file that you designate as filepath3.
 """
 import csv
-import re
 import os
+import re
 
 #This is the filepath of the Financial Statement text documents. This must be changed to your respective filepath.
-filepath="F:\\Financial Statements"
+filepath="statements"
 #This is the filepath of the word dictionary files.  This must be changed to your respective filepath.
-filepath2="D:\\Dropbox\\Documents\Data\\SEC FILING DATA\\Current 10K Scrape\\Word Files"
+filepath2="Word Dictionaries"
 #This is where you would like the cleaned / identied MD&A section text files to be written.  This file must also include the 
 #downloadlog file from the previously run MASTERSCRAPE.py program.
-filepath3="C:\\Users\\rdf0969\\Documents\\Python Scripts\\test"
+filepath3="statements"
 
 NEGATIVE=os.path.join(filepath2,"NEGATIVE.txt")
 POSITIVE=os.path.join(filepath2,"POSITIVE.txt")
-SD=os.path.join(filepath3,"SampleData.txt")
+SD=os.path.join(filepath3,"SampleData.csv")
 download=os.path.join(filepath3,"DOWNLOADLOG.txt")
+
+with open(SD,'w') as f: 
+    f.write("File,CompanyName,CIK,SIC,ReportDate,Section,TotalWords,NumPos,NumNeg,NumAcq\n")
 
 '''
 This section will upload the dictionaries
@@ -45,7 +48,8 @@ DONE
 Beginning of the program
 '''
 with open(download, 'r') as txtfile:
-    reader = csv.reader(txtfile, delimiter=',')
+    reader = csv.reader(txtfile, delimiter='\t')
+    next(reader, None)
     for line in reader:
         FileNUM=line[0].strip()
         Sections=int(line[1].strip())
@@ -59,6 +63,7 @@ with open(download, 'r') as txtfile:
                 line=line.strip()
                 if re.findall('^COMPANY NAME:',line):
                     COMNAM=line.replace("COMPANY NAME: ","")
+                    COMNAM='"{}"'.format(COMNAM)
                 if re.findall('^CIK:',line):
                     CIK=line.replace("CIK: ","")
                 if re.findall('^SIC:',line):
