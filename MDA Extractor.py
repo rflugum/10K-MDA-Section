@@ -220,7 +220,7 @@ def table_clean(cond1, cond2, str1):
 This is the filepath of where you would like the text files of possible MD&A sections to be saved.  It is also the location of the downloadlist.txt file
 that includes all of the filing links.
 '''
-filepath="."   
+filepath="statements"   
 
 ###############################################################################
 #This is the master download file that include all of the links to SEC filings.
