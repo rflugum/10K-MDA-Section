@@ -1,0 +1,4 @@
+.vscode
+*.pyc
+statements/*.txt
+statements/SampleData.csv

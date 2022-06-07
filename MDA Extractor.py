@@ -5,6 +5,7 @@ in each quarter.  The repository includes that actual download links (i.e. downl
 that we use in our study.  Our links include all filings classified as '10-K','10-K/A','10-K405/A','10-K405','10-KSB',
 '10-KSB/A','10KSB','10KSB/A','10KSB40','10KSB40/A' from 2002 to 2016. 
 """
+# pylint: disable=W1401
 
 import csv
 import requests
@@ -37,7 +38,7 @@ def parse(file1, file2):
             k = line.find(':')
             cik=line[k+1:]
             cik=cik.strip()
-            #print cik
+            #print(cik)
             IDENTITY=IDENTITY+'CIK: '+str(cik)+'\n'
             break
         
@@ -52,7 +53,7 @@ def parse(file1, file2):
             for s in sic: 
                 if s.isdigit():
                     siccode.append(s)    
-            #print siccode
+            #print(siccode)
             IDENTITY=IDENTITY+'SIC: '+''.join(siccode)+'\n'
             break
         
@@ -63,7 +64,7 @@ def parse(file1, file2):
             k = line.find(':')
             subtype=line[k+1:]
             subtype=subtype.strip()
-            #print subtype
+            #print(subtype)
             IDENTITY=IDENTITY+'FORM TYPE: '+str(subtype)+'\n'
             break
             
@@ -74,7 +75,7 @@ def parse(file1, file2):
             k = line.find(':')
             cper=line[k+1:]
             cper=cper.strip()
-            #print cper
+            #print(cper)
             IDENTITY=IDENTITY+'REPORT PERIOD END DATE: '+str(cper)+'\n'
             break
             
@@ -85,7 +86,7 @@ def parse(file1, file2):
             k = line.find(':')
             fdate=line[k+1:]
             fdate=fdate.strip()
-            #print fdate                                
+            #print(fdate)
             IDENTITY=IDENTITY+'FILE DATE: '+str(fdate)+'\n'+'</HEADER>\n'
             break
             
@@ -127,20 +128,20 @@ def headerclean(temp, temp1):
 
 def xbrl_clean(cond1, cond2, str0):
     locations=[0]
-    #print locations
+    #print(locations)
     placement1=[]
     str0=str0.lower()
     for m in re.finditer(cond1, str0):
         a=m.start()
         placement1.append(a)
-    #print placement1
+    #print(placement1)
     
     if placement1!=[]:
         placement2=[]
         for m in re.finditer(cond2, str0):
             a=m.end()
             placement2.append(a)
-    #    print placement2
+    #    print(placement2)
         
         len1=len(placement1)
         placement1.append(len(str0))
@@ -157,7 +158,7 @@ def xbrl_clean(cond1, cond2, str0):
             else:
                 locations.append(placement1[i])
     
-    #print locations
+    #print(locations)
     return locations
 
 ###########################  Table Cleaner  ###################################################
@@ -219,7 +220,7 @@ def table_clean(cond1, cond2, str1):
 This is the filepath of where you would like the text files of possible MD&A sections to be saved.  It is also the location of the downloadlist.txt file
 that includes all of the filing links.
 '''
-filepath="C:\\Users\\rdf0969\\Documents\\Financial Statement Data"   
+filepath="statements"   
 
 ###############################################################################
 #This is the master download file that include all of the links to SEC filings.
@@ -245,12 +246,12 @@ with open(LOG,'w') as f:
 with open(download, 'r') as txtfile:
     reader = csv.reader(txtfile, delimiter=',')
     for line in reader:
-        #print line
+        #print(line)
         FileNUM=line[0].strip()
         Filer=os.path.join(filepath, str(line[0].strip())+".txt")
         url = 'https://www.sec.gov/Archives/' + line[1].strip()
         with open(temp, 'w') as f:
-            f.write(requests.get('%s' % url).content)
+            f.write(requests.get('%s' % url).content.decode("utf-8"))
         f.close()
         
 ##### Obtain Header Information on Filing ######################        
@@ -269,7 +270,7 @@ with open(download, 'r') as txtfile:
             if locations_xbrlbig!=[]:
                 str1=""
                 if len(locations_xbrlbig)%2==0:
-                    for i in xrange(0,len(locations_xbrlbig),2):
+                    for i in range(0,len(locations_xbrlbig),2):
                         str1=str1+output[locations_xbrlbig[i]:locations_xbrlbig[i+1]]
 
         f.close
@@ -280,7 +281,7 @@ with open(download, 'r') as txtfile:
         if locations_xbrlbig!=[0]:
             str1=""
             if len(locations_xbrlbig)%2==0:
-                for i in xrange(0,len(locations_xbrlbig),2):
+                for i in range(0,len(locations_xbrlbig),2):
                     str1=str1+output[locations_xbrlbig[i]:locations_xbrlbig[i+1]]
         
         output=str1
@@ -290,7 +291,7 @@ with open(download, 'r') as txtfile:
         if locations_xbrlbig!=[0]:
             str1=""
             if len(locations_xbrlbig)%2==0:
-                for i in xrange(0,len(locations_xbrlbig),2):
+                for i in range(0,len(locations_xbrlbig),2):
                     str1=str1+output[locations_xbrlbig[i]:locations_xbrlbig[i+1]]
                     
         output=str1
@@ -300,7 +301,7 @@ with open(download, 'r') as txtfile:
         if locations_xbrlbig!=[0]:
             str1=""
             if len(locations_xbrlbig)%2==0:
-                for i in xrange(0,len(locations_xbrlbig),2):
+                for i in range(0,len(locations_xbrlbig),2):
                     str1=str1+output[locations_xbrlbig[i]:locations_xbrlbig[i+1]]
         
         output=str1
@@ -310,7 +311,7 @@ with open(download, 'r') as txtfile:
         if locations_xbrlbig!=[0]:
             str1=""
             if len(locations_xbrlbig)%2==0:
-                for i in xrange(0,len(locations_xbrlbig),2):
+                for i in range(0,len(locations_xbrlbig),2):
                     str1=str1+output[locations_xbrlbig[i]:locations_xbrlbig[i+1]]
 
         output=str1
@@ -320,7 +321,7 @@ with open(download, 'r') as txtfile:
         if locations_xbrlbig!=[0]:
             str1=""
             if len(locations_xbrlbig)%2==0:
-                for i in xrange(0,len(locations_xbrlbig),2):
+                for i in range(0,len(locations_xbrlbig),2):
                     str1=str1+output[locations_xbrlbig[i]:locations_xbrlbig[i+1]]
                     
 ######Remove <DIV>, <TR>, <TD>, and <FONT>###########################
@@ -365,7 +366,7 @@ with open(download, 'r') as txtfile:
         if locations_xbrlsmall!=[0]:
             str1=""
             if len(locations_xbrlsmall)%2==0:
-                for i in xrange(0,len(locations_xbrlsmall),2):
+                for i in range(0,len(locations_xbrlsmall),2):
                     str1=str1+output[locations_xbrlsmall[i]:locations_xbrlsmall[i+1]]
         
 ############# Remove Teble Sections #########################
@@ -532,10 +533,10 @@ with open(download, 'r') as txtfile:
                 else:
                     substr1=lstr1[m.start()-20:m.start()]
                     if not any(s in substr1 for s in look):   
-                        #print substr1
+                        #print(substr1)
                         b=m.start()
                         a[j].append(b)
-        #print i
+        #print(i)
     
         list1=[]
         for value in a.values():
@@ -543,7 +544,7 @@ with open(download, 'r') as txtfile:
                 list1.append(thing1)
         list1.sort()
         list1.append(len(lstr1))
-        #print list1
+        #print(list1)
                
         for j in range(1,49):
             c[j]=[]
@@ -553,7 +554,7 @@ with open(download, 'r') as txtfile:
                 else:
                     substr1=lstr1[m.start()-20:m.start()]
                     if not any(s in substr1 for s in look):   
-                        #print substr1
+                        #print(substr1)
                         b=m.start()
                         c[j].append(b)
         list2=[]
@@ -564,10 +565,10 @@ with open(download, 'r') as txtfile:
         
         locations={}
         if list2==[]:
-            print "NO MD&A"
+            print("NO MD&A")
         else:
             if list1==[]:
-                print "NO MD&A"
+                print("NO MD&A")
             else:
                 for k0 in range(len(list1)):
                     locations[k0]=[]
@@ -599,6 +600,4 @@ with open(download, 'r') as txtfile:
             with open(LOG,'a') as f:
                     f.write(str(FileNUM)+"\t"+str(sections)+"\n")
                     f.close()
-        print FileNUM
-     
-        
+        print(FileNUM)
